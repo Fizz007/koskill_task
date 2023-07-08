@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { userAuth } from "./Auth";
 import { toast } from "react-toastify";
+import { baseURL } from "../config/BaseURL";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:4000/user/signin`, {
+      const response = await axios.post(`${baseURL}/user/signin`, {
         email,
         password,
       });
@@ -43,7 +44,7 @@ const Login = () => {
     const register = {cname, cemail, cpass, phone, address, info};
     console.log(register)
     try {
-        const response = await axios.post(`http://localhost:4000/customer`, {
+        const response = await axios.post(`${baseURL}/customer`, {
           name:cname,
           email:cemail,
           password:cpass,
@@ -60,7 +61,8 @@ const Login = () => {
         setAddress("");
         setInfo("");
         toast.success("Data Stored",{
-          position: toast.POSITION.TOP_RIGHT,}
+          position: toast.POSITION.TOP_RIGHT,
+          }
         )
     }
       catch (error) {

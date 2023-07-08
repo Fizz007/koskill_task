@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { userAuth } from "./Auth";
 import ReactPaginate from 'react-paginate';
+import { baseURL } from "../config/BaseURL";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ const Home = () => {
 
   const getCustomer = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/customer`);
+      const response = await axios.get(`${baseURL}/customer`);
       console.log(response.data.user);   
       setData(response.data.user);
     } catch (error) {
@@ -24,7 +25,7 @@ const Home = () => {
   };
 
   function getPaginatedUsers(){
-    fetch(`http://localhost:4000/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
+    fetch(`${baseURL}/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -41,7 +42,7 @@ const Home = () => {
   const deleteCustomer = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/customer/${id}`
+        `${baseURL}/customer/${id}`
       );
       console.log("deleted", response);
       getCustomer();

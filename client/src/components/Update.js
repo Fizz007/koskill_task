@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import { baseURL } from "../config/BaseURL";
 
 const Update = () => {
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ const Update = () => {
   const navv = useNavigate();
 
   const getSingleData = async () => {
-    const response = await axios.get(`http://localhost:4000/customer/${id}`);
+    const response = await axios.get(`${baseURL}/customer/${id}`);
     const result = response.data.user;
     console.log(result)
     if (response) {
@@ -33,7 +34,7 @@ const Update = () => {
     console.log(updatedUser);
     
     try {
-      const response = await axios.patch(`http://localhost:4000/customer/${id}`, updatedUser);
+      const response = await axios.patch(`${baseURL}/customer/${id}`, updatedUser);
       
       if (response.status === 200) {
         const result = response.data;
