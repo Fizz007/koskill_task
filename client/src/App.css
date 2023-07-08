@@ -115,7 +115,7 @@ button:hover{
 
 /* Home */
 
-/*  import google fonts */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 *{
   margin: 0;
@@ -135,7 +135,7 @@ nav{
   bottom: 0;
   height: 100vh;
   left: 0;
-  width: 90px;
+  width: 130px;
   /* width: 280px; */
   background: #fff;
   overflow: hidden;
@@ -341,11 +341,3 @@ table thead tr{
   width: 100vw;
 }
 
-.logo{
-  display: flex;
-  justify-content: start;
-  cursor: pointer;
-}
-header{
-  color: white;
-}

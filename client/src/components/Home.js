@@ -1,22 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaMenorah, FaSignOutAlt } from "react-icons/fa";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { userAuth } from "./Auth";
+import ReactPaginate from 'react-paginate';
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [limit,setLimit]=useState(4);
+  const [pageCount,setPageCount]=useState(1);
+  const currentPage=useRef();
   const auth = useContext(userAuth);
+
   const getCustomer = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/customer");
-      console.log(response.data.user);
+      const response = await axios.get(`http://localhost:4000/customer`);
+      console.log(response.data.user);   
       setData(response.data.user);
     } catch (error) {
       console.error("Failed", error);
     }
   };
+
+  function getPaginatedUsers(){
+    fetch(`http://localhost:4000/paginatedUsers?page=${currentPage.current}&limit=${limit}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "userData");
+        setPageCount(data.pageCount);
+        setData(data.result)
+        
+       
+      });
+
+  }
 
   const deleteCustomer = async (id) => {
     try {
@@ -29,6 +49,18 @@ const Home = () => {
       console.error("Failed", error);
     }
   };
+  function handlePageClick(e) {
+    console.log(e);
+   currentPage.current=e.selected+1;
+    getPaginatedUsers();
+   
+
+  }
+
+  function changeLimit(){
+    currentPage.current=1;
+    getPaginatedUsers();
+  }
 
   function handleLogout(){
     auth.logout();
@@ -36,10 +68,13 @@ const Home = () => {
   }
 
   useEffect(() => {
+    currentPage.current=1;
+    getPaginatedUsers();
     getCustomer();
   }, []);
 
   return (
+    <>
     <div className="container">
       <nav>
         <ul>
@@ -111,10 +146,34 @@ const Home = () => {
                   );
                 })}
             </table>
+            
           </div>
         </section>
+        
       </section>
+
+     
+    <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        marginPagesDisplayed={2}
+        containerClassName="pagination justify-content-center"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        activeClassName="active"
+        forcePage={currentPage.current-1}
+      />
     </div>
+    </>
   );
 };
 
