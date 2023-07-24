@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/userModel');
 const SECRET_KEY = "FAIZZAPI1"
 
+
+//SIGNUP
+
 const userSignup = async (req,res)=> {
 
     const {name,email, password} = req.body
@@ -29,6 +32,8 @@ const userSignup = async (req,res)=> {
     }
 }
 
+
+//SIGNIN
 const userSignin = async (req,res)=> {
     const {email, password} = req.body;
 

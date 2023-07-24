@@ -1,7 +1,7 @@
 
 const Customers = require('../model/customerModel');
 
-
+//CREATE
 const createUser = async (req, res) => {
   const { name, email, password, phoneNumber, address, additionalInfo } = req.body;
   console.log(name)
@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
   }
 };
 
-
+//GET ALL
   const getAllUser = async (req, res) => {
     try {
       const allUser = await Customers.find();
@@ -33,6 +33,7 @@ const createUser = async (req, res) => {
   
   };
 
+  //GET BY ID
   const getUserById = async (req, res) => {
     const {id} = req.params
     try {
@@ -43,6 +44,7 @@ const createUser = async (req, res) => {
     }
   };
 
+  //UPDATE
   const updateSingle = async (req, res) => {
     const { id } = req.params;
     console.log("get body", req.body);
@@ -57,6 +59,7 @@ const createUser = async (req, res) => {
     }
   };
 
+  // DELETE
   const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {

@@ -1,13 +1,19 @@
 const express = require("express");
 const app = express();
 const cors = require('cors')
-
 app.use(cors());
+
+
+//MIDDLEWARE
+app.use(express.json())
+
+//Routes
 const userRoutes = require('./routes/userRoutes')
 const customerRoutes = require('./routes/customerRoutes')
-app.use(express.json())
 app.use('/user', userRoutes)
 app.use('/customer', customerRoutes)
+
+//PAGINATION
 const Customers = require('./model/customerModel')
 
 app.get('/paginatedUsers', async(req,res)=> {
