@@ -341,3 +341,38 @@ table thead tr{
   width: 100vw;
 }
 
+/* pagination.css */
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.page-item {
+  display: inline-block;
+  margin: 30px 5px;
+}
+
+
+.page-link {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  background-color: #4AD489;
+  color: #fff;
+  border: 1px solid #4AD489;
+}
+
+
+.page-item.disabled .page-link {
+  color: #ccc;
+  border: 1px solid #ccc;
+}
