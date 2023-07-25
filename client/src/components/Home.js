@@ -151,9 +151,6 @@ const Home = () => {
           </div>
         </section>
         
-      </section>
-
-     
     <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
@@ -173,6 +170,9 @@ const Home = () => {
         activeClassName="active"
         forcePage={currentPage.current-1}
       />
+      </section>
+
+     
     </div>
     </>
   );
